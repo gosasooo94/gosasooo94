@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="mybatis.guest.mapper.CommentMapper">
+
+		<!-- 번호로 검색 -->
+<select id="selectCommentByPrimaryKey" parameterType="long" resultType="Comment">
+select comment_no as commentNo, user_id as userId, comment_content as commentContent,
+	reg_date as regDate from comment_tab where comment_no = #{commentNo}
+</select>
+
+<!-- 글 입력 -->
+
+<insert id="insertComment" parameterType="Comment">
+insert into comment_tab(comment_no,user_id,comment_content,reg_date) values(#{commentNo},#{userId},#{commentContent},sysdate)
+</insert>
+
+<!-- 글 전체 뽑아오기 -->
+<select id="selectCommentByCondition" parameterType="hashmap" resultType="Comment">
+SELECT
+	comment_no AS commentNo,
+	user_id AS userId,
+	comment_content AS commentContent,
+	reg_date AS regDate
+	FROM comment_tab
+
+</select>
+
+<update id="updateComment" parameterType="Comment">
+UPDATE comment_tab
+SET user_id=#{userId}, comment_content=#{commentContent}
+WHERE comment_no=#{commentNo}
+</update>
+
+<delete id="deleteComment" parameterType="Long">
+DELETE FROM comment_tab
+WHERE comment_no = #{commentNo}
+</delete>
+
+</mapper>

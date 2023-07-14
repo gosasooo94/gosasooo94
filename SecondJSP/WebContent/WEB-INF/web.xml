@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>SecondJSP</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description></description>
+    <display-name>SimpleControl</display-name>
+    <servlet-name>SimpleControl</servlet-name>
+    <servlet-class>mvc.simple.SimpleControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SimpleControl</servlet-name>
+    <url-pattern>/SimpleControl</url-pattern>
+    <url-pattern>*.sc</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>GuestControl</display-name>
+    <servlet-name>GuestControl</servlet-name>
+    <servlet-class>mvc.guest.control.GuestControl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GuestControl</servlet-name>
+    <url-pattern>/GuestControl</url-pattern>
+    <url-pattern>*.gc</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>UploadServlet</display-name>
+    <servlet-name>UploadServlet</servlet-name>
+    <servlet-class>fileupload.temp.UploadServlet</servlet-class>
+    <!-- 파일업로드 처리 -->
+    <multipart-config>
+       <location>C:\workspaces\JSP\SecondJSP\WebContent\09_upload_class\temp</location>
+       <file-size-threshold>1024</file-size-threshold>       
+    </multipart-config>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+          <description>자료실</description>
+          <display-name>FileUploadServlet</display-name>
+          <servlet-name>FileUploadServlet</servlet-name>
+          <servlet-class>pds.file.FileUploadServlet</servlet-class>
+          <multipart-config>
+             <location>C:\workspaces\JSP\SecondJSP\WebContent\09_upload_class\temp</location>
+             <!-- 임시 폴더 -->
+             <file-size-threshold>1024</file-size-threshold>       
+          </multipart-config>
+        </servlet>
+        <servlet-mapping>
+          <servlet-name>FileUploadServlet</servlet-name>
+          <url-pattern>/pds</url-pattern>
+        </servlet-mapping>
+ 
+</web-app>

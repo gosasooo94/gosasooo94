@@ -1,0 +1,19 @@
+===========================================================
+
+테이블명 : ARTICLE
+
+게시글 번호 		ARTICLE_ID				NUMBER				(PK)
+그룹번호			GROUP_ID						NUMBER
+순서번호			SEQUENCE_NO				CHAR(16)
+게시글등록일시		POSTING_DATE		DATE
+조회수			READ_COUNT						NUMBER
+작성자이름			WRITER_NAME			VARCHAR2(20)
+게시글 암호			PASSWORD					VARCHAR2(20)
+게시글 제목			TITLE							VARCHAR2(100)
+게시글 내용			CONTENT						VARCHAR2(1024)
+
+------------------------------------------------------------
+
+게시글 번호 시퀀스명 : SEQ_ARTICLE_ID_ARTICLE
+
+그룹 번호 시퀀스명 : SEQ_GROUP_ID_ARTICLE

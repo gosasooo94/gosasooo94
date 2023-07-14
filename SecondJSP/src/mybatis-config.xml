@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<properties resource = "dbconnect.properties">
+</properties>
+
+<!-- 빈 클래스 등록 -->
+<typeAliases>
+<typeAlias type="mybatis.guest.model.Comment" alias="Comment"/>
+</typeAliases>
+
+<environments default="development">
+<environment id="development">
+<transactionManager type="JDBC"/>
+<dataSource type="POOLED">
+<!-- @ 별칭부여: <properties> 앞에 기술
+         <typeAliases>
+           <typeAliase type=”model.Comment” alias=”comment” />
+         </typeAliases>
+         
+         
+         @ dbconnect.properties 
+            - src 폴더에 파일생성
+         jdbc.driver=oracle.jdbc.driver.OracleDriver
+         jdbc.url=jdbc:oracle:thin:@localhost:1521:orcl
+         jdbc.username=scott
+         jdbc.password=tiger
+         
+         
+         @ <transactionManager>의 type
+            JDBC      - 마이바티스에서 제공하는 메소드로 트랜잭션 관리  ex) commit / rollback
+            MANAGED    - 컨테이너가 트랜잭션 관리
+         
+         @ <dataSource>의 type
+            POOLED   - ConnectionPool 이용
+            UNPOOLED   - DB 요청시 매번 연결을 새롭게 하고 해제 ( 성능저하 )
+            JNDI     -
+         
+         @ <mapper>의 속성
+            ` resource   : 클래스 패스에 위치한 xml 매퍼 파일 지정
+            ` url    : url을 사용한 xml 매퍼 파일 지정
+            ` class   : 매퍼 인터페이스를 사용한 인터페이스 위치 지정
+            ` name   : 패키지 지정 ( 패키지 내 자동으로 매퍼 검색 )
+         
+            [예]
+            resource   =”ldg/mybatis/repository/mapper/CommentMapper.xml”
+            url   =”file:/// ldg/mybatis/repository/mapper/CommentMapper.xml”
+            class   =”ldg.mybatis.repository.mapper.CommentMapper”
+            name   =”ldg.mybatis”
+          
+         @ <configuration> 루트 엘리먼트의 주요 자식 엘리먼트
+         properties   프로퍼티 파일에 있는 경로 설정
+         settings   프레임워크의 실행환경을 설정 (ex. 로그파일 설정)
+         typeAliases   자바 클래스 이름에 대한 별칭 설정
+         typeHandlers   컬럼의 값을 자바 객체로, 자바 객체를 컬럼의 값으로 변환하는 클래스 설정
+         environments   프레임워크에서 연결할 DB 정보 설정
+         mappers   SQL 멤퍼 파일 설정
+          
+         
+         @ <resultMap> 엘리먼트 : 컬럼과 setter 메소드의 이름이 달라서 AS로 별칭 주는 대신 정의
+         : mapper.xml 파일에서
+         
+             컬럼과 setter명이 다를 때 
+            <resultMap type="model.Comment" id="commentResultMap">
+               <id column="comment_no" property="commentNo"/>
+               <result column="user_id" property="userId" />
+               <result column="comment_content" property="commentContent" />
+               <result column="reg_date" property="regDate" />
+            </resultMap>
+         
+         번호로 검색
+         <select id="selectCommentByPrimaryKey" parameterType="long" resultType="model.Comment">
+         <select id="selectCommentByPrimaryKey" parameterType="long" resultMap="commentResultMap">
+            select    comment_no    as          commentNO,
+                     user_id             as          userId,
+                     comment_content    as    commentContent,
+                     reg_date          as          regDate
+             from comment_tab where comment_no = #{commentNo}
+         </select>
+         
+         
+         @ DB 컬럼명의 언더바표기법을 낙타표기법의 프로퍼티로 지정할 때 
+         : config.xml 파일에서 
+         <configuration> 안에 <properties resource="dbconnect.properties"></properties> 뒤에
+         
+            검색시 컬럼명과 setter의 프로퍼티가 다른경우
+            <settings>
+               <setting name="mapUnderscoreToCamelCase" value="true"/>
+            </settings>
+           -->
+
+<!--       <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@192.168.0.36:1521:orcl"/>
+      <property name="username" value="lts"/>
+      <property name="password" value="soon"/>  -->
+      
+<property name="driver" value="${jdbc.driver}"/>
+<property name="url" value="${jdbc.url}"/>
+<property name="username" value="${jdbc.username}"/>
+<property name="password" value="${jdbc.password}"/> 
+</dataSource>
+</environment>
+</environments>
+<!--  매퍼 등록 -->
+<mappers>
+<mapper resource="mybatis/guest/mapper/CommentMapper.xml"/>
+</mappers>
+
+</configuration>
